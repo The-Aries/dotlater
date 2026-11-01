@@ -22,6 +22,7 @@ Click the dot or press **Ctrl + Shift + X** (**⌘ + Shift + X** on Mac) to togg
 | Document | Contents |
 | --- | --- |
 | [Usage & Settings](docs/GUIDE.md) | Mark tabs, shortcuts, options, installation |
+| [Demo](assets/demo.gif) | Short recording of the tab marker in Microsoft Edge |
 | [Privacy](docs/PRIVACY.md) | Data and permissions |
 | [Development & Credits](docs/DEVELOPMENT.md) | Source, tests, attribution |
 

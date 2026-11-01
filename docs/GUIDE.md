@@ -2,6 +2,8 @@
 
 ## Mark tabs
 
+![DotLater green-to-yellow tab marker in Microsoft Edge](../assets/demo.gif)
+
 | Action | Result |
 | --- | --- |
 | Click the **green dot** | Mark for later; toolbar turns yellow |

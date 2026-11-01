@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "DotLater",
+  "version": "1.0",
+  "description": "Mark tabs with a yellow dot and return to them later.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "src/background.js",
+    "scripts": ["src/unread-icon.js", "src/background.js"]
+  },
+  "options_page": "src/options.html",
+  "icons": {
+    "16": "assets/icons/green-dot-16.png",
+    "32": "assets/icons/green-dot-32.png",
+    "48": "assets/icons/green-dot-48.png",
+    "128": "assets/icons/green-dot-128.png"
+  },
+  "action": {
+    "default_title": "Mark as unread",
+    "default_icon": {
+      "16": "assets/icons/green-dot-16.png",
+      "32": "assets/icons/green-dot-32.png",
+      "48": "assets/icons/green-dot-48.png",
+      "128": "assets/icons/green-dot-128.png"
+    }
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      }
+    }
+  }
+}

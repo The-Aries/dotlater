@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>DotLater Settings</title>
+<style>
+  body { font: 15px system-ui, sans-serif; max-width: 520px; margin: 40px auto; padding: 0 20px; color: #202124; }
+  h1 { font-size: 22px; }
+  select { font: inherit; padding: 8px; margin: 8px 0; }
+  p { line-height: 1.55; }
+</style>
+<h1>DotLater</h1>
+<label for="auto-clear">Clear mark after returning to a tab</label>
+<div>
+  <select id="auto-clear">
+    <option value="1">After 1 second (recommended)</option>
+    <option value="2">After 2 seconds</option>
+    <option value="5">After 5 seconds</option>
+    <option value="0">Immediately on return</option>
+    <option value="-1">Never (manual only)</option>
+  </select>
+</div>
+<p>The countdown starts only after you switch away from a marked tab and come back.
+  Switching away before the timer expires preserves the mark.
+  A change to this setting takes effect the next time you mark a tab.</p>
+<p id="status" role="status"></p>
+<script src="options.js"></script>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "dotlater",
+  "private": true,
+  "version": "1.0",
+  "description": "Manually mark tabs unread with a single click",
+  "scripts": {
+    "test": "node --test tests/extension.test.cjs",
+    "test:browser": "node tests/browser-smoke.cjs"
+  },
+  "license": "MIT"
+}

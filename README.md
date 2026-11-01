@@ -24,7 +24,6 @@ Click the dot or press **Ctrl + Shift + X** (**⌘ + Shift + X** on Mac) to togg
 | [Usage & Settings](docs/GUIDE.md) | Mark tabs, shortcuts, options, installation |
 | [Privacy](docs/PRIVACY.md) | Data and permissions |
 | [Development & Credits](docs/DEVELOPMENT.md) | Source, tests, attribution |
-| [Publishing](docs/PUBLISHING.md) | Edge store release checklist |
 
 Found a bug or want another browser supported? [Open an issue](https://github.com/The-Aries/dotlater/issues) or submit a pull request.
 

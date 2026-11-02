@@ -35,6 +35,7 @@ No approved Edge store listing is available yet. The GitHub Release provides man
 ## Limits
 
 - Ordinary web pages and local HTML can show the yellow **tab favicon**. Local files require Edge file-URL access.
+- **Safari:** it may not refresh a favicon changed by an extension. DotLater instead prefixes marked page titles with `🟡`, removing the prefix on unmark or auto-clear. Safari may delay updating the visible title until the tab is switched. Its sidebar is not a native vertical tab strip.
 - PDFs and protected Edge pages may only show the yellow **toolbar dot**, because Edge does not allow extensions to change their page contents. Where Edge disables the extension action entirely, no mark can be applied.
 - Closing a tab or ending the browser session removes its mark. Navigating to a different URL also clears it.
 - Edge on macOS has been tested; other browsers are not officially supported.

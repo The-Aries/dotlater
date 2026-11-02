@@ -6,7 +6,7 @@ const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
 
-function contentHarness(initialIcons = []) {
+function contentHarness(initialIcons = [], safari = false) {
   let messageListener;
   let visibilityListener;
   let now = 0;
@@ -33,17 +33,24 @@ function contentHarness(initialIcons = []) {
     querySelectorAll() { return this.links.filter((link) => link.rel.split(/\s+/).includes('icon')); }
   };
   class Observer {
-    constructor(callback) { this.callback = callback; Observer.latest = this; }
+    constructor(callback) {
+      this.callback = callback;
+      Observer.latest = this;
+      (Observer.instances ||= []).push(this);
+    }
     observe() { this.active = true; }
     disconnect() { this.active = false; }
     simulateChange() { if (this.active) this.callback(); }
   }
   const document = {
-    head, hidden: false, createElement: () => new Link(),
+    head, hidden: false, title: 'Wikipedia', createElement: () => new Link(),
     addEventListener(type, fn) { if (type === 'visibilitychange') visibilityListener = fn; }
   };
   const context = {
     document, MutationObserver: Observer,
+    navigator: safari
+      ? { vendor: 'Apple Computer, Inc.', userAgent: 'Version/26.4 Safari/605.1.15' }
+      : { vendor: 'Google Inc.', userAgent: 'Chrome/156.0 Safari/537.36' },
     setTimeout(callback, delay) {
       const id = ++nextTimer;
       timers.set(id, { at: now + delay, callback });
@@ -59,7 +66,7 @@ function contentHarness(initialIcons = []) {
   };
   vm.runInNewContext(fs.readFileSync(path.join(root, 'src/content.js'), 'utf8'), context);
   return {
-    head, Observer, sent,
+    head, Observer, sent, document,
     toggle(marked, icon = 'data:image/png;base64,MARKED', autoClearSeconds = 1) {
       messageListener({ type: 'setUnreadMark', marked, icon, markId: 'test-mark', autoClearSeconds });
     },
@@ -124,6 +131,37 @@ test('site changes favicon while marked: the current underlying icon restores', 
   assert.equal(link.href, 'data:image/png;base64,MARKED');
   page.toggle(false);
   assert.equal(link.href, '/new.ico');
+});
+
+test('Safari shows a title marker and restores the latest site title', () => {
+  const page = contentHarness([['icon', '/favicon.ico']], true);
+  page.toggle(true);
+  assert.equal(page.document.title, '🟡 Wikipedia');
+  page.document.title = 'Updated Wikipedia';
+  page.Observer.instances.forEach((observer) => observer.simulateChange());
+  assert.equal(page.document.title, '🟡 Updated Wikipedia');
+  page.toggle(false);
+  assert.equal(page.document.title, 'Updated Wikipedia');
+  page.toggle(true);
+  page.toggle(false);
+  assert.equal(page.document.title, 'Updated Wikipedia');
+});
+
+test('Safari preserves titles that already start with the marker', () => {
+  const page = contentHarness([], true);
+  page.document.title = '🟡 Original site title';
+  page.toggle(true);
+  assert.equal(page.document.title, '🟡 🟡 Original site title');
+  page.toggle(false);
+  assert.equal(page.document.title, '🟡 Original site title');
+});
+
+test('Chromium pages keep their original title', () => {
+  const page = contentHarness([['icon', '/favicon.ico']]);
+  page.toggle(true);
+  assert.equal(page.document.title, 'Wikipedia');
+  page.toggle(false);
+  assert.equal(page.document.title, 'Wikipedia');
 });
 
 test('manifest grants per-click rather than all-sites permissions', () => {

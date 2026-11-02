@@ -5,10 +5,40 @@ if (!globalThis.__tabUnreadToggleInstalled) {
   const ORIGINAL_TYPE = "data-tab-unread-original-type";
   const TYPE_WAS_ABSENT = "__absent__";
   const ADDED = "data-tab-unread-added";
+  const SAFARI_MARK = "🟡 ";
+  const safari = typeof navigator !== "undefined" &&
+    navigator.vendor === "Apple Computer, Inc." &&
+    /Safari\//.test(navigator.userAgent) &&
+    !/(?:Chrome|Chromium|Edg|OPR)\//.test(navigator.userAgent);
   const overlayState = {
     observer: null, icon: "", markId: "", hasLeft: false,
-    autoClearSeconds: 1, clearTimer: null
+    autoClearSeconds: 1, clearTimer: null, titleObserver: null
   };
+
+  function stopTitleMark() {
+    overlayState.titleObserver?.disconnect();
+    overlayState.titleObserver = null;
+    if (safari && document.title.startsWith(SAFARI_MARK)) {
+      document.title = document.title.slice(SAFARI_MARK.length);
+    }
+  }
+
+  function startTitleMark() {
+    if (!safari) return;
+    // Always add our own prefix, even when the site's original title starts
+    // with the same symbol. Removing one prefix restores the original title.
+    document.title = SAFARI_MARK + document.title;
+    const ensureMark = () => {
+      if (!document.title.startsWith(SAFARI_MARK)) {
+        document.title = SAFARI_MARK + document.title;
+      }
+    };
+    ensureMark();
+    overlayState.titleObserver = new MutationObserver(ensureMark);
+    overlayState.titleObserver.observe(document.head, {
+      childList: true, characterData: true, subtree: true
+    });
+  }
 
   function cancelAutoClear() {
     if (overlayState.clearTimer !== null) clearTimeout(overlayState.clearTimer);
@@ -76,6 +106,7 @@ if (!globalThis.__tabUnreadToggleInstalled) {
   function updateMark({ marked, icon, markId = "", autoClearSeconds = 1 }) {
     overlayState.observer?.disconnect();
     overlayState.observer = null;
+    if (overlayState.titleObserver) stopTitleMark();
     cancelAutoClear();
     if (!marked) {
       for (const link of document.head.querySelectorAll('link[rel~="icon"]')) {
@@ -102,6 +133,7 @@ if (!globalThis.__tabUnreadToggleInstalled) {
     overlayState.markId = markId;
     overlayState.autoClearSeconds = autoClearSeconds;
     overlayState.icon = icon;
+    startTitleMark();
     markLinks();
     overlayState.observer = new MutationObserver(() => {
       overlayState.observer.disconnect();

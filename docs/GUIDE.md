@@ -2,7 +2,7 @@
 
 ## Mark tabs
 
-![DotLater green-to-yellow tab marker in Microsoft Edge](../assets/demo.gif)
+![Illustrated DotLater green-to-yellow marker and automatic clear workflow](../assets/demo.gif)
 
 | Action | Result |
 | --- | --- |
@@ -27,10 +27,12 @@ Open **DotLater → Extension options** in `edge://extensions`.
 
 | Method | How |
 | --- | --- |
-| **Microsoft Edge Add-ons** | Install from the store once DotLater is published; the listing link will be added then |
+| **Microsoft Edge Add-ons** | The extension has been approved; the public listing link will be added after it is confirmed |
 | **GitHub Releases** | [Download v1.0 ZIP](https://github.com/The-Aries/dotlater/releases/download/v1.0/DotLater-v1.0.zip), extract it, open `edge://extensions`, enable **Developer mode**, choose **Load unpacked** and select the extracted folder containing `manifest.json` |
 
-No approved Edge store listing is available yet. The GitHub Release provides manual installation files; the source repository can also be loaded unpacked for development. See [Development](DEVELOPMENT.md).
+The public Edge store listing URL has not yet been confirmed. The GitHub Release provides manual installation files; the source repository can also be loaded unpacked for development. See [Development](DEVELOPMENT.md).
+
+**After installation:** Open the browser Extensions menu (puzzle-piece icon), find DotLater, and choose **Show in toolbar** or **Pin**. Pinning is optional; the keyboard shortcut also works without it.
 
 ## Limits
 
@@ -38,4 +40,4 @@ No approved Edge store listing is available yet. The GitHub Release provides man
 - **Safari:** it may not refresh a favicon changed by an extension. DotLater instead prefixes marked page titles with `🟡`, removing the prefix on unmark or auto-clear. Safari may delay updating the visible title until the tab is switched. Its sidebar is not a native vertical tab strip.
 - PDFs and protected Edge pages may only show the yellow **toolbar dot**, because Edge does not allow extensions to change their page contents. Where Edge disables the extension action entirely, no mark can be applied.
 - Closing a tab or ending the browser session removes its mark. Navigating to a different URL also clears it.
-- Edge on macOS has been tested; other browsers are not officially supported.
+- Chrome and Firefox have passed extension-function tests on recent stable releases. Safari uses the title-prefix fallback described above; its store package is not yet published.

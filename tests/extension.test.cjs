@@ -205,7 +205,7 @@ test('cross-browser background scripts initialize without service-worker importS
       action: { onClicked: listeners },
       tabs: { onUpdated: listeners, onRemoved: listeners, onActivated: listeners },
       windows: { onFocusChanged: listeners },
-      runtime: { onMessage: listeners }
+      runtime: { onMessage: listeners, onInstalled: listeners }
     },
     console
   });
@@ -213,6 +213,41 @@ test('cross-browser background scripts initialize without service-worker importS
   vm.runInContext(fs.readFileSync(path.join(root, 'src/background.js'), 'utf8'), context);
   assert.match(vm.runInContext('UNREAD_ICON_DATA', context), /^data:image\/png;base64,/);
   assert.equal(vm.runInContext('typeof toggleTab', context), 'function');
+});
+
+test('first installation opens the existing settings guide, not extension updates', async () => {
+  let installed;
+  let opened = 0;
+  const listeners = { addListener() {} };
+  const context = vm.createContext({
+    chrome: {
+      action: { onClicked: listeners },
+      tabs: { onUpdated: listeners, onRemoved: listeners, onActivated: listeners },
+      windows: { onFocusChanged: listeners },
+      runtime: {
+        onMessage: listeners,
+        onInstalled: { addListener(fn) { installed = fn; } },
+        openOptionsPage() { opened += 1; return Promise.resolve(); }
+      }
+    },
+    console
+  });
+  vm.runInContext(fs.readFileSync(path.join(root, 'src/unread-icon.js'), 'utf8'), context);
+  vm.runInContext(fs.readFileSync(path.join(root, 'src/background.js'), 'utf8'), context);
+  assert.equal(typeof installed, 'function');
+  installed({ reason: 'update' });
+  assert.equal(opened, 0);
+  installed({ reason: 'install' });
+  assert.equal(opened, 1);
+});
+
+test('settings page contains a standalone quick start for store installs', () => {
+  const html = fs.readFileSync(path.join(root, 'src/options.html'), 'utf8');
+  assert.match(html, /Get started/);
+  assert.match(html, /Pin/);
+  assert.match(html, /green dot/);
+  assert.match(html, /yellow/);
+  assert.match(html, /auto-clear/);
 });
 
 test('staying on the tab after marking does not auto-clear', () => {

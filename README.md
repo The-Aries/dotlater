@@ -19,16 +19,11 @@ Click the dot or press **Ctrl + Shift + X** (**⌘ + Shift + X** on Mac) to togg
 
 **Pin DotLater to your toolbar:** open your browser's **Extensions** menu (puzzle-piece icon) and select **Show in toolbar** or **Pin** next to DotLater. Then click its green dot to mark the current tab. Click again to unmark, or return to the tab to clear the mark automatically.
 
-![Illustrated DotLater workflow: pin the green dot, mark a tab yellow, switch away, and return to clear it](assets/demo.gif)
-
-*Illustrated workflow, not a browser screenshot. Green means unmarked; yellow means marked. Browser layouts may vary.*
-
 ## Documentation
 
 | Document | Contents |
 | --- | --- |
 | [Usage & Settings](docs/GUIDE.md) | Mark tabs, shortcuts, options, installation |
-| [Demo](assets/demo.gif) | Four-step illustrated walkthrough |
 | [Privacy](docs/PRIVACY.md) | Data and permissions |
 | [Development & Credits](docs/DEVELOPMENT.md) | Source, tests, attribution |
 

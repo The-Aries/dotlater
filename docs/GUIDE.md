@@ -2,8 +2,6 @@
 
 ## Mark tabs
 
-![Illustrated DotLater green-to-yellow marker and automatic clear workflow](../assets/demo.gif)
-
 | Action | Result |
 | --- | --- |
 | Click the **green dot** | Mark for later; toolbar turns yellow |

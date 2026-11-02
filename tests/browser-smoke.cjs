@@ -101,6 +101,14 @@ async function main() {
     const pageTarget = targets.find((target) => target.type === 'page' && target.url === url);
     assert.ok(workerTarget, `Extension worker not found: ${JSON.stringify(targets.map((t) => t.url))}`);
     assert.ok(pageTarget, 'Test page not found');
+    for (let i = 0; i < 20 && !targets.some((target) =>
+      target.type === 'page' && target.url.endsWith('/src/options.html')); i++) {
+      await delay(150);
+      targets = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json();
+    }
+    assert.ok(targets.some((target) => target.type === 'page' &&
+      target.url.endsWith('/src/options.html')),
+    'First installation must open the settings guide');
     console.error('SMOKE: targets found');
 
     const worker = await devtoolsConnection(workerTarget.webSocketDebuggerUrl);

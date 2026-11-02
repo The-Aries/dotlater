@@ -110,6 +110,16 @@ chrome.action.onClicked.addListener((tab) => {
   });
 });
 
+// Show the existing settings page once after the first installation.
+// Users installing from a browser store may never visit the GitHub README.
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason !== "install") return;
+  if (typeof chrome.runtime.openOptionsPage !== "function") return;
+  void chrome.runtime.openOptionsPage().catch((error) => {
+    console.warn("Could not open first-run guide", error);
+  });
+});
+
 chrome.tabs.onUpdated.addListener((tabId, info) => serializeMutation(async () => {
   const key = String(tabId);
   const states = await readStates();

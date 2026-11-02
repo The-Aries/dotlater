@@ -30,6 +30,43 @@ The browser test launches a disposable Edge profile using only the extension's p
 
 See [PRIVACY.md](PRIVACY.md) for details.
 
+## Build packages for multiple browsers
+
+All browser versions share the same JavaScript, HTML, options, and icons.
+The root manifest contains both supported background declarations for local
+development. Store ZIPs are generated from it, with only browser-specific
+metadata changed. Do not copy or edit separate versions of the source files.
+
+    npm test
+    npm run build
+
+The build creates these packages in the ignored dist directory:
+
+| Package | Background runtime | Distribution |
+| --- | --- | --- |
+| chrome | Manifest V3 service worker | Chrome Web Store |
+| edge | Manifest V3 service worker | Microsoft Edge Add-ons |
+| firefox | Background scripts, plus Mozilla ID and data-collection declaration | Firefox Add-ons (AMO) |
+| safari | Background scripts | Safari Web Extension packager / Xcode |
+
+Run one target with, for example:
+
+    node scripts/build.cjs firefox
+
+Build folders can be loaded as unpacked extensions during testing.
+Chrome and Edge packages require no access to Mozilla-specific metadata.
+Firefox store/release installations require Mozilla signing; the ZIP is
+the unsigned source submission, not a signed XPI.
+Safari distribution requires Apple Developer Program membership and a
+signed containing app. Apple's Safari Web Extension packager in App Store
+Connect can convert the Safari ZIP without requiring a separate native
+source tree; the existing Xcode conversion project is only an optional
+local packaging/test route.
+
+The ZIPs are not published automatically. A browser version can be
+submitted to its store independently, but all releases should derive
+from the same Git commit and use coordinated version numbers.
+
 ## Licenses and credits
 
 DotLater code is [MIT licensed](../LICENSE), including permission for commercial use. Its yellow-dot icon originated from [Chat Dinger](https://github.com/rumblelab/chatdinger) (MIT), with a green color variant. The original copyright and license notice are preserved in [THIRD_PARTY_LICENSE.txt](THIRD_PARTY_LICENSE.txt).

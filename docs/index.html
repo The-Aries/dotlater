@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DotLater helps you mark browser tabs for later with one click.">
+  <meta name="color-scheme" content="light">
+  <title>DotLater — One dot. One click. Come back later.</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #1d2939; background: #fafbf8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.6; }
+    a { color: #235b41; text-underline-offset: 3px; }
+    a:hover { color: #124b31; }
+    .container { width: min(980px, calc(100% - 40px)); margin: 0 auto; }
+    header { border-bottom: 1px solid #e2e9e0; background: #fff; }
+    .topbar { min-height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .brand { text-decoration: none; color: #1d2939; font-size: 1.2rem; font-weight: 750; display: inline-flex; align-items: center; gap: 11px; }
+    .brand-dot { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #58b96c; box-shadow: 0 0 0 4px #e5f4e8; }
+    nav { display: flex; gap: 23px; flex-wrap: wrap; }
+    nav a { color: #536270; text-decoration: none; font-size: .91rem; }
+    main { padding-bottom: 45px; }
+    .hero { padding: 76px 0 52px; }
+    .eyebrow { letter-spacing: .12em; text-transform: uppercase; color: #317951; font-size: .76rem; font-weight: 750; }
+    h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.12; letter-spacing: -.035em; margin: 14px 0 20px; max-width: 740px; }
+    .lead { color: #566475; font-size: 1.16rem; max-width: 640px; margin-bottom: 28px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .action { display: inline-block; padding: 11px 17px; border-radius: 10px; text-decoration: none; font-weight: 650; border: 1px solid #bed0bf; }
+    .action.primary { background: #276d46; color: #fff; border-color: #276d46; }
+    .action.secondary { background: #fff; color: #285a43; }
+    .section { margin: 38px 0 54px; }
+    h2 { font-size: 1.6rem; line-height: 1.25; letter-spacing: -.02em; margin: 0 0 17px; }
+    .muted { color: #667486; }
+    .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .step { background: #fff; border: 1px solid #e2e9e0; border-radius: 14px; padding: 19px; }
+    .number { display: inline-flex; width: 30px; height: 30px; align-items: center; justify-content: center; border-radius: 50%; color: #236c45; background: #e6f4e9; font-weight: 800; }
+    h3 { margin: 14px 0 7px; font-size: 1.04rem; }
+    .step p { margin: 0; font-size: .96rem; color: #566475; }
+    .dot { display: inline-block; width: 13px; height: 13px; border-radius: 50%; vertical-align: -1px; }
+    .dot.green { background: #58b96c; }
+    .dot.yellow { background: #f7cb3c; }
+    .demo { display: block; width: 100%; max-width: 900px; height: auto; border-radius: 12px; border: 1px solid #d5ddd4; background: #ecf0ec; }
+    .note { font-size: .9rem; color: #718091; margin: 12px 0 0; }
+    .details { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .details > div { background: #fff; border: 1px solid #e2e9e0; border-radius: 14px; padding: 20px; }
+    .details p { color: #566475; margin: 0; }
+    kbd { font: 600 .86rem ui-monospace, SFMono-Regular, Menlo, monospace; background: #f0f3f0; padding: 3px 6px; border: 1px solid #dbe3dc; border-radius: 5px; white-space: nowrap; }
+    footer { border-top: 1px solid #e2e9e0; padding: 24px 0 38px; color: #667486; font-size: .9rem; }
+    footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+    @media (max-width: 680px) {
+      .topbar { align-items: flex-start; flex-direction: column; padding: 16px 0; gap: 10px; }
+      .hero { padding: 48px 0 22px; }
+      .steps, .details { grid-template-columns: 1fr; }
+      nav { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <a class="brand" href="./"><span class="brand-dot" aria-hidden="true"></span>DotLater</a>
+      <nav aria-label="Site navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#demo">Demo</a>
+        <a href="#help">Help</a>
+        <a href="https://github.com/The-Aries/dotlater">GitHub</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">A simple browser tab reminder</div>
+      <h1>One dot. One click.<br>Come back later.</h1>
+      <p class="lead">Keep a tab in sight without keeping it in mind. Mark it yellow and let DotLater clear the mark when you return.</p>
+      <div class="actions">
+        <a class="action primary" href="#how-it-works">Get started</a>
+        <a class="action secondary" href="https://github.com/The-Aries/dotlater/releases">View releases</a>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section" aria-labelledby="steps-heading">
+      <h2 id="steps-heading">Get started in three steps</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="number">1</span>
+          <h3>Pin DotLater</h3>
+          <p>Open the browser's <strong>Extensions</strong> menu (puzzle-piece icon) and choose <strong>Pin</strong> or <strong>Show in toolbar</strong>. In Safari, enable the extension in Safari Settings first.</p>
+        </div>
+        <div class="step">
+          <span class="number">2</span>
+          <h3>Mark any tab</h3>
+          <p>Click the <span class="dot green" aria-label="green"></span> green dot. It turns <span class="dot yellow" aria-label="yellow"></span> yellow to mark the tab. Click it again to unmark.</p>
+        </div>
+        <div class="step">
+          <span class="number">3</span>
+          <h3>Return when ready</h3>
+          <p>Switch to another tab. When you return, the mark clears after one second by default. You can change the delay in extension settings.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="section" aria-labelledby="demo-heading">
+      <h2 id="demo-heading">See it in action</h2>
+      <img class="demo" src="https://raw.githubusercontent.com/The-Aries/dotlater/main/assets/demo.gif" width="900" height="689" alt="Real Chrome tab bar: a tab gets a yellow dot, stays marked when switching away, and clears when the tab is revisited.">
+      <p class="note">Recorded from a clean Chrome testing profile. This demonstration uses real browser-window captures; it does not currently show mouse movement.</p>
+    </section>
+
+    <section id="help" class="section" aria-labelledby="help-heading">
+      <h2 id="help-heading">Useful to know</h2>
+      <div class="details">
+        <div>
+          <h3>Keyboard shortcut</h3>
+          <p>Press <kbd>Ctrl + Shift + X</kbd> on Windows/Linux or <kbd>⌘ + Shift + X</kbd> on Mac to toggle the mark.</p>
+        </div>
+        <div>
+          <h3>Change the delay</h3>
+          <p>Open <strong>DotLater → Extension options</strong> in your browser's extension manager. Settings are stored by your browser, not this website.</p>
+        </div>
+        <div>
+          <h3>Some tabs look different</h3>
+          <p>Browser-protected pages might not allow marking. Safari uses a yellow prefix in the page title when its favicon cannot update.</p>
+        </div>
+        <div>
+          <h3>More help</h3>
+          <p>Read the <a href="https://github.com/The-Aries/dotlater/blob/main/docs/GUIDE.md">full usage guide</a> or <a href="https://github.com/The-Aries/dotlater/issues">report a problem</a> on GitHub.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <span>DotLater · Open source · MIT License</span>
+      <span><a href="https://github.com/The-Aries/dotlater/blob/main/docs/PRIVACY.md">Privacy</a> · <a href="https://github.com/The-Aries/dotlater">Source code</a></span>
+    </div>
+  </footer>
+</body>
+</html>

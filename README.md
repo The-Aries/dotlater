@@ -12,6 +12,8 @@ Click the dot or press **Ctrl + Shift + X** (**⌘ + Shift + X** on Mac) to togg
 
 ## Quick Start
 
+**[Website & getting started guide](https://the-aries.github.io/dotlater/)**
+
 | Install method | Get started |
 | --- | --- |
 | Microsoft Edge Add-ons | Approved; public listing link pending |

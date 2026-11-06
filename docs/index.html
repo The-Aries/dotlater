@@ -9,69 +9,88 @@
   <style>
     :root { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #1d2939; background: #fff; }
     * { box-sizing: border-box; }
-    body { margin: 0; line-height: 1.55; }
-    .wrap { max-width: 780px; padding: 0 22px; margin: 0 auto; }
+    body { margin: 0; line-height: 1.45; }
     a { color: #216c46; text-underline-offset: 3px; }
+    .wrap { width: min(1000px, calc(100% - 40px)); margin: 0 auto; }
     header { border-bottom: 1px solid #edf0ed; }
-    header .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 20px; }
-    .brand { color: inherit; text-decoration: none; font-weight: 750; font-size: 1.13rem; display: inline-flex; align-items: center; gap: 10px; }
-    .brand::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: #5bbf71; }
-    header a:last-child { color: #677485; font-size: .9rem; }
-    main { padding-top: 62px; }
-    h1 { font-size: clamp(2rem, 6vw, 3.1rem); line-height: 1.14; letter-spacing: -.035em; margin: 0 0 17px; }
-    .lead { color: #657384; font-size: 1.07rem; margin: 0 0 44px; }
-    h2 { font-size: 1.35rem; letter-spacing: -.02em; margin: 0 0 18px; }
-    ol { padding: 0; list-style: none; margin: 0 0 42px; display: grid; gap: 18px; }
-    li { display: flex; align-items: flex-start; gap: 15px; }
-    .num { flex: 0 0 27px; width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; background: #e8f4e9; color: #246c45; font-size: .85rem; font-weight: 750; }
-    li p { margin: 0; }
-    .muted { color: #657384; }
-    .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
+    header .wrap { min-height: 52px; display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: inline-flex; align-items: center; gap: 9px; font-size: 1.1rem; font-weight: 750; color: inherit; text-decoration: none; }
+    .brand::before { content: ""; width: 16px; height: 16px; border-radius: 50%; background: #5bbf71; }
+    header .link { color: #657384; font-size: .9rem; }
+    main { padding: 24px 0 18px; }
+    h1 { margin: 0 0 8px; font-size: clamp(2rem, 4vw, 2.65rem); letter-spacing: -.035em; line-height: 1.12; }
+    .lead { color: #657384; margin: 0; font-size: 1rem; }
+    .content { display: grid; grid-template-columns: minmax(0, 38fr) minmax(0, 62fr); gap: 28px; margin-top: 24px; align-items: start; }
+    h2 { margin: 0 0 15px; font-size: 1.2rem; letter-spacing: -.02em; }
+    ol { display: grid; list-style: none; gap: 20px; margin: 0; padding: 0; }
+    li { display: flex; gap: 12px; align-items: flex-start; }
+    li p { margin: 0; font-size: .96rem; }
+    .num { flex: 0 0 25px; display: grid; place-items: center; height: 25px; border-radius: 50%; background: #e8f4e9; color: #246c45; font-size: .82rem; font-weight: 750; }
+    .dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
     .green { background: #5bbf71; }
     .yellow { background: #f3c744; }
-    .demo { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid #e1e6e2; border-radius: 9px; }
-    .hint { font-size: .85rem; color: #738091; margin: 10px 0 0; }
-    .help { border-top: 1px solid #edf0ed; padding: 24px 0 46px; margin-top: 38px; color: #657384; font-size: .93rem; }
-    .help p { margin: 8px 0; }
-    kbd { font: 600 .86rem ui-monospace, SFMono-Regular, Menlo, monospace; padding: 2px 5px; background: #f4f6f4; border-radius: 4px; }
-    footer { border-top: 1px solid #edf0ed; padding: 20px 0 32px; color: #89939c; font-size: .85rem; }
-    @media (max-width: 600px) { main { padding-top: 44px; } .lead { margin-bottom: 35px; } }
+    .shortcut { color: #657384; margin: 24px 0 0; font-size: .9rem; }
+    kbd { font: 600 .83rem ui-monospace, SFMono-Regular, Menlo, monospace; background: #f4f6f4; border-radius: 4px; padding: 2px 4px; }
+    .demo { display: block; width: 100%; height: auto; border: 1px solid #e1e6e2; border-radius: 8px; }
+    .hint { color: #738091; font-size: .82rem; margin: 7px 0 0; }
+    footer { border-top: 1px solid #edf0ed; padding: 12px 0 18px; color: #7b8794; font-size: .84rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    footer a { color: inherit; }
+    @media (max-width: 700px) {
+      .wrap { width: min(520px, calc(100% - 36px)); }
+      main { padding-top: 16px; }
+      h1 { font-size: 1.95rem; }
+      .content { grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
+      ol { gap: 10px; }
+      li p { font-size: .93rem; }
+      .shortcut { margin-top: 11px; }
+      h2 { margin-bottom: 8px; }
+      .demo { max-width: 300px; margin: 0 auto; }
+      .hint { margin-top: 5px; }
+      footer { padding: 9px 0; }
+    }
+    @media (max-height: 720px) and (min-width: 701px) {
+      main { padding-top: 16px; }
+      .content { margin-top: 16px; }
+      h1 { font-size: 2.2rem; }
+    }
+    @media (max-height: 800px) and (min-width: 701px) {
+      .demo { max-width: 510px; }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap">
       <a class="brand" href="./">DotLater</a>
-      <a href="https://github.com/The-Aries/dotlater">GitHub</a>
+      <a class="link" href="https://github.com/The-Aries/dotlater">GitHub</a>
     </div>
   </header>
-
   <main class="wrap">
-    <h1>Mark a tab.<br>Come back later.</h1>
+    <h1>Mark a tab. Come back later.</h1>
     <p class="lead">A small dot to remind you which tabs to revisit.</p>
-
-    <section aria-labelledby="start">
-      <h2 id="start">How to use</h2>
-      <ol>
-        <li><span class="num">1</span><p><strong>Pin DotLater.</strong> Find it in your browser's Extensions menu and choose <strong>Pin</strong> (or <strong>Show in toolbar</strong>).</p></li>
-        <li><span class="num">2</span><p><strong>Mark a tab.</strong> Click the <span class="dot green" aria-label="green dot"></span> green dot. It turns <span class="dot yellow" aria-label="yellow dot"></span> yellow. Click again to undo.</p></li>
-        <li><span class="num">3</span><p><strong>Come back.</strong> Switch away, then return. The yellow mark clears automatically after one second.</p></li>
-      </ol>
-    </section>
-
-    <section aria-labelledby="demo-heading">
-      <h2 id="demo-heading">See it in action</h2>
-      <img class="demo" src="https://raw.githubusercontent.com/The-Aries/dotlater/main/assets/demo.gif" width="900" height="689" alt="Real Chrome tabs: an unmarked tab becomes yellow, stays marked while another tab is active, and clears when revisited.">
-      <p class="hint">Real browser test captures. Mouse clicks are not shown in this version.</p>
-    </section>
-
-    <div class="help">
-      <p><strong>Shortcut:</strong> <kbd>Ctrl + Shift + X</kbd> or <kbd>⌘ + Shift + X</kbd> on Mac.</p>
-      <p><strong>Settings:</strong> Open DotLater's extension options to change the auto-clear delay.</p>
-      <p><a href="https://github.com/The-Aries/dotlater/blob/main/docs/GUIDE.md">More help</a> · <a href="https://github.com/The-Aries/dotlater/issues">Report an issue</a></p>
+    <div class="content">
+      <section aria-labelledby="how-to-use">
+        <h2 id="how-to-use">How to use</h2>
+        <ol>
+          <li><span class="num">1</span><p><strong>Pin DotLater.</strong> Open the Extensions menu and choose <strong>Pin</strong> or <strong>Show in toolbar</strong>.</p></li>
+          <li><span class="num">2</span><p><strong>Mark a tab.</strong> Click the <span class="dot green" aria-label="green dot"></span> green dot. It turns <span class="dot yellow" aria-label="yellow dot"></span> yellow. Click again to undo.</p></li>
+          <li><span class="num">3</span><p><strong>Come back.</strong> Return to the tab to clear the mark automatically after one second.</p></li>
+        </ol>
+        <p class="shortcut"><strong>Shortcut:</strong> <kbd>Ctrl + Shift + X</kbd><br>Mac: <kbd>⌘ + Shift + X</kbd></p>
+      </section>
+      <section aria-labelledby="demo-heading">
+        <h2 id="demo-heading">See it in action</h2>
+        <img class="demo" src="https://raw.githubusercontent.com/The-Aries/dotlater/main/assets/demo.gif" width="900" height="689" alt="Real Chrome tabs: an unmarked tab becomes yellow, stays marked while another tab is active, and clears when revisited.">
+        <p class="hint">Real browser test captures. Mouse clicks are not shown.</p>
+      </section>
     </div>
   </main>
-
-  <footer><div class="wrap">DotLater · <a href="https://github.com/The-Aries/dotlater/blob/main/LICENSE">MIT License</a> · <a href="https://github.com/The-Aries/dotlater/blob/main/docs/PRIVACY.md">Privacy</a></div></footer>
+  <footer>
+    <div class="wrap">
+      <span>Change the delay in DotLater's extension options.</span>
+      <span><a href="https://github.com/The-Aries/dotlater/blob/main/docs/GUIDE.md">Help</a> · <a href="https://github.com/The-Aries/dotlater/blob/main/docs/PRIVACY.md">Privacy</a> · <a href="https://github.com/The-Aries/dotlater/issues">Issues</a></span>
+    </div>
+  </footer>
 </body>
 </html>

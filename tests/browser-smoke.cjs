@@ -102,13 +102,13 @@ async function main() {
     assert.ok(workerTarget, `Extension worker not found: ${JSON.stringify(targets.map((t) => t.url))}`);
     assert.ok(pageTarget, 'Test page not found');
     for (let i = 0; i < 20 && !targets.some((target) =>
-      target.type === 'page' && target.url.endsWith('/src/options.html')); i++) {
+      target.type === 'page' && target.url === 'https://the-aries.github.io/dotlater/'); i++) {
       await delay(150);
       targets = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json();
     }
     assert.ok(targets.some((target) => target.type === 'page' &&
-      target.url.endsWith('/src/options.html')),
-    'First installation must open the settings guide');
+      target.url === 'https://the-aries.github.io/dotlater/'),
+    'First installation must open the public guide');
     console.error('SMOKE: targets found');
 
     const worker = await devtoolsConnection(workerTarget.webSocketDebuggerUrl);

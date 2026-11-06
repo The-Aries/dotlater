@@ -215,19 +215,21 @@ test('cross-browser background scripts initialize without service-worker importS
   assert.equal(vm.runInContext('typeof toggleTab', context), 'function');
 });
 
-test('first installation opens the existing settings guide, not extension updates', async () => {
+test('first installation opens the public guide once, never on updates', async () => {
   let installed;
-  let opened = 0;
+  const opened = [];
   const listeners = { addListener() {} };
   const context = vm.createContext({
     chrome: {
       action: { onClicked: listeners },
-      tabs: { onUpdated: listeners, onRemoved: listeners, onActivated: listeners },
+      tabs: {
+        onUpdated: listeners, onRemoved: listeners, onActivated: listeners,
+        create({ url }) { opened.push(url); return Promise.resolve(); }
+      },
       windows: { onFocusChanged: listeners },
       runtime: {
         onMessage: listeners,
-        onInstalled: { addListener(fn) { installed = fn; } },
-        openOptionsPage() { opened += 1; return Promise.resolve(); }
+        onInstalled: { addListener(fn) { installed = fn; } }
       }
     },
     console
@@ -236,18 +238,16 @@ test('first installation opens the existing settings guide, not extension update
   vm.runInContext(fs.readFileSync(path.join(root, 'src/background.js'), 'utf8'), context);
   assert.equal(typeof installed, 'function');
   installed({ reason: 'update' });
-  assert.equal(opened, 0);
+  assert.equal(opened.length, 0);
   installed({ reason: 'install' });
-  assert.equal(opened, 1);
+  assert.deepEqual(opened, ['https://the-aries.github.io/dotlater/']);
 });
 
-test('settings page contains a standalone quick start for store installs', () => {
+test('settings page remains local and links to the public guide', () => {
   const html = fs.readFileSync(path.join(root, 'src/options.html'), 'utf8');
-  assert.match(html, /Get started/);
-  assert.match(html, /Pin/);
-  assert.match(html, /green dot/);
-  assert.match(html, /yellow/);
+  assert.match(html, /https:\/\/the-aries.github.io\/dotlater\//);
   assert.match(html, /auto-clear/);
+  assert.match(html, /options.js/);
 });
 
 test('staying on the tab after marking does not auto-clear', () => {

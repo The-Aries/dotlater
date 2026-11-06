@@ -26,9 +26,18 @@ The browser test launches a disposable Edge profile using only the extension's p
 
 ## Permissions and storage
 
-`activeTab` grants access to the current tab when the user clicks the icon or invokes the shortcut. `scripting` changes and restores the favicon; `storage` retains temporary session marks and the delay preference. No host permissions, external requests, telemetry or account are required.
+`activeTab` grants access to the current tab when the user clicks the icon or invokes the shortcut. `scripting` changes and restores the favicon; `storage` retains temporary session marks and the delay preference. No host permissions, telemetry or account are required. On first installation only, the browser opens the public guide; the site is not involved in tab marking or storage.
 
 See [PRIVACY.md](PRIVACY.md) for details.
+
+## Public documentation site
+
+GitHub Pages publishes the static [index.html](index.html) from the
+main branch's /docs folder. No custom build workflow or site dependencies
+are needed. On installation only, DotLater opens
+https://the-aries.github.io/dotlater/. The extension's options page remains
+local to the browser so the auto-clear setting works without internet access.
+Keep all executable extension logic in src/, not on GitHub Pages.
 
 ## Build packages for multiple browsers
 

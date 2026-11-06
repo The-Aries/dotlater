@@ -110,12 +110,11 @@ chrome.action.onClicked.addListener((tab) => {
   });
 });
 
-// Show the existing settings page once after the first installation.
-// Users installing from a browser store may never visit the GitHub README.
+// Open the public, static getting-started guide once after installation.
+// Extension options remain local so settings work without the website.
 chrome.runtime.onInstalled.addListener(({ reason }) => {
   if (reason !== "install") return;
-  if (typeof chrome.runtime.openOptionsPage !== "function") return;
-  void chrome.runtime.openOptionsPage().catch((error) => {
+  void chrome.tabs.create({ url: "https://the-aries.github.io/dotlater/" }).catch((error) => {
     console.warn("Could not open first-run guide", error);
   });
 });

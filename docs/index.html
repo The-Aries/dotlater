@@ -16,6 +16,7 @@
     header .wrap { min-height: 52px; display: flex; justify-content: space-between; align-items: center; }
     .brand { display: inline-flex; align-items: center; gap: 9px; font-size: 1.1rem; font-weight: 750; color: inherit; text-decoration: none; }
     .brand::before { content: ""; width: 16px; height: 16px; border-radius: 50%; background: #5bbf71; }
+    header .links { display: flex; gap: 19px; align-items: center; }
     header .link { color: #657384; font-size: .9rem; }
     main { padding: 24px 0 18px; }
     h1 { margin: 0 0 8px; font-size: clamp(2rem, 4vw, 2.65rem); letter-spacing: -.035em; line-height: 1.12; }
@@ -63,7 +64,10 @@
   <header>
     <div class="wrap">
       <a class="brand" href="./">DotLater</a>
-      <a class="link" href="https://github.com/The-Aries/dotlater">GitHub</a>
+      <nav class="links" aria-label="External links">
+        <a class="link" href="https://microsoftedge.microsoft.com/addons/detail/dnockdnebimcohmnhgijdmphfjacldan">Install for Edge</a>
+        <a class="link" href="https://github.com/The-Aries/dotlater">GitHub</a>
+      </nav>
     </div>
   </header>
   <main class="wrap">

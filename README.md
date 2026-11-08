@@ -16,7 +16,7 @@ Click the dot or press **Ctrl + Shift + X** (**⌘ + Shift + X** on Mac) to togg
 
 | Install method | Get started |
 | --- | --- |
-| Microsoft Edge Add-ons | Approved; public listing link pending |
+| Microsoft Edge Add-ons | [Install DotLater from the official Edge store](https://microsoftedge.microsoft.com/addons/detail/dnockdnebimcohmnhgijdmphfjacldan) |
 | GitHub Release (manual) | [Download v1.0 ZIP](https://github.com/The-Aries/dotlater/releases/download/v1.0/DotLater-v1.0.zip), then follow the [installation steps](docs/GUIDE.md#quick-start) |
 
 ![Actual DotLater tab marking test in Chrome, including browser tabs and toolbar](assets/demo.gif)

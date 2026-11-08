@@ -25,10 +25,10 @@ Open **DotLater → Extension options** in `edge://extensions`.
 
 | Method | How |
 | --- | --- |
-| **Microsoft Edge Add-ons** | The extension has been approved; the public listing link will be added after it is confirmed |
+| **Microsoft Edge Add-ons** | [Install directly from the official store](https://microsoftedge.microsoft.com/addons/detail/dnockdnebimcohmnhgijdmphfjacldan) |
 | **GitHub Releases** | [Download v1.0 ZIP](https://github.com/The-Aries/dotlater/releases/download/v1.0/DotLater-v1.0.zip), extract it, open `edge://extensions`, enable **Developer mode**, choose **Load unpacked** and select the extracted folder containing `manifest.json` |
 
-The public Edge store listing URL has not yet been confirmed. The GitHub Release provides manual installation files; the source repository can also be loaded unpacked for development. See [Development](DEVELOPMENT.md).
+DotLater is publicly listed in Microsoft Edge Add-ons. Use the official store link for the simplest installation and automatic updates. GitHub Release files and unpacked source installation are intended for manual testing and development. See [Development](DEVELOPMENT.md).
 
 **After installation:** Open the browser Extensions menu (puzzle-piece icon), find DotLater, and choose **Show in toolbar** or **Pin**. Pinning is optional; the keyboard shortcut also works without it.
 

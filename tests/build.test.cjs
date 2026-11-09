@@ -57,6 +57,7 @@ test('store ZIP archives are built from identical source files', () => {
       assert.ok(zipped.stdout.split(/\r?\n/).includes('manifest.json'));
       assert.ok(zipped.stdout.split(/\r?\n/).includes('src/background.js'));
       assert.ok(zipped.stdout.split(/\r?\n/).includes('docs/THIRD_PARTY_LICENSE.txt'));
+      assert.doesNotMatch(zipped.stdout, /assets\/demo\.gif/);
       assert.doesNotMatch(zipped.stdout, /(^|\/)\.git(\/|$)|node_modules|tests\//m);
     }
   } finally {

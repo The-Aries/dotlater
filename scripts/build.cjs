@@ -9,7 +9,9 @@ const { spawnSync } = require('node:child_process');
 
 const root = path.resolve(__dirname, '..');
 const targets = ['chrome', 'edge', 'firefox', 'safari'];
-const files = ['src', 'assets', 'LICENSE', 'docs/THIRD_PARTY_LICENSE.txt'];
+// Documentation media (for example assets/demo.gif) is hosted on GitHub,
+// not needed by the installed extension.
+const files = ['src', 'assets/icons', 'LICENSE', 'docs/THIRD_PARTY_LICENSE.txt'];
 
 function manifestFor(target) {
   if (!targets.includes(target)) throw new Error('Unknown target: ' + target);

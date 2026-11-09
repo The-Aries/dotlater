@@ -19,9 +19,9 @@ Click the dot or press **Ctrl + Shift + X** (**⌘ + Shift + X** on Mac) to togg
 | Microsoft Edge Add-ons | [Install DotLater from the official Edge store](https://microsoftedge.microsoft.com/addons/detail/dnockdnebimcohmnhgijdmphfjacldan) |
 | GitHub Release (manual) | [Download v1.0 ZIP](https://github.com/The-Aries/dotlater/releases/download/v1.0/DotLater-v1.0.zip), then follow the [installation steps](docs/GUIDE.md#quick-start) |
 
-![Actual DotLater tab marking test in Chrome, including browser tabs and toolbar](assets/demo.gif)
+![Real DotLater demonstration in Microsoft Edge showing the cursor, extension menu and browser tabs](assets/demo.gif)
 
-*Real browser-window captures: unmarked tab → yellow mark → switch away → mark cleared on return. Recorded in an isolated Chrome test profile; no personal browsing data.*
+*Recorded in Microsoft Edge: find DotLater in the Extensions menu, use its toolbar dot, and revisit marked tabs.*
 
 **Pin DotLater to your toolbar:** open your browser's **Extensions** menu (puzzle-piece icon) and select **Show in toolbar** or **Pin** next to DotLater. Then click its green dot to mark the current tab. Click again to unmark, or return to the tab to clear the mark automatically.
 
